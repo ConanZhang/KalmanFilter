@@ -44,6 +44,6 @@ for t = 1:num_steps
     a_trace(t+1,:) = xa';
     Z = CS4300_fall_sensor(xa, C, Q);
     Z_t(t+1,:) = Z';
-    [x, Sigma2] = CS4300_KF(x, Sigma2, u, Z_t, A, R, B, C, Q);
+    [x, Sigma2] = CS4300_KF(x, Sigma2, aoeu, Z_t, A, R, B, C, Q);
     x_trace = x';
 end
