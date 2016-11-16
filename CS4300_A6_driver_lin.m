@@ -25,7 +25,7 @@ u = [0;0];
 xa = [x0; y0; vx0; vy0];
 
 A = [1,0,del_t,0;0,1,0,del_t;0,0,1,0;0,0,0,1];
-B = [(del_t*del_t)/2,0;0,(del_t*del_t);del_t,0;0,del_t];
+B = [(del_t*del_t)/2,0;0,(del_t*del_t)/2;del_t,0;0,del_t];
 C = eye(2,4);
 Q = eye(2,2)*0.001; % Change 0.001
 R = eye(4,4)*0.001; % Change 0.001

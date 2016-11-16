@@ -17,10 +17,10 @@ function xa = CS4300_process(xa, A, B, u, R)
 xa = (A * xa) + (B * u);
 
 [rows,cols] = size(R);
-n = zeros(4,1);
+n = zeros(rows,1);
 
 for t = 1:rows
-   n(t,1) = sqrt(R(t,t)); 
+   n(t) = sqrt(R(t,t))*randn; 
 end
 
 xa = xa + n;

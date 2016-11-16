@@ -38,31 +38,38 @@ function [xt,at,zt,St] = CS4300_driver_proj(dt,t_max,obs_freq,g,r,q)
 %     UU
 %     Fall 2016
 
-u = [0;-g];
-xa = [0; 0; 365; 365];
+u = [0;-9.8];
+xa = [x0; y0; vx0; vy0];
 
-A = [1,0,dt,0;0,1,0,dt;0,0,1,0;0,0,0,1];
-B = [(dt*dt)/2,0;0,(dt*dt)/2;dt,0;0,dt];
+A = [1,0,del_t,0;0,1,0,del_t;0,0,1,0;0,0,0,1];
+B = [(del_t*del_t)/2,0;0,(del_t*del_t)/2;del_t,0;0,del_t];
 C = eye(2,4);
-Q = eye(2,2)*q; % Change 0.001
-R = eye(4,4)*r; % Change 0.001
+Q = eye(2,2)*0.001; % Change 0.001
+R = eye(4,4)*0.001; % Change 0.001
 z = CS4300_sensor(xa, C, Q);
-zt = z';
+z_trace = z';
 x = [z(1); z(2); 0; 0];
 Sigma2 = zeros(4,4);
-xt = x';
-St(1).Sigma2 = Sigma2;
+x_trace = x';
+Sigma2_trace(1).Sigma2 = Sigma2;
 
-t_vals = [0:dt:t_max];
+t_vals = [0:del_t:max_time];
 num_steps = length(t_vals);
-at = xa';
+a_trace = xa';
 
 for t = 1:num_steps
     xa = CS4300_process(xa, A, B, u, R);
-    at(t+1,:) = xa';
+    a_trace(t+1,:) = xa';
     z = CS4300_sensor(xa, C, Q);
-    zt(t+1,:) = z';
+    z_trace(t+1,:) = z';
     [x, Sigma2] = CS4300_KF(x, Sigma2, u, z, A, R, B, C, Q);
-    xt(t+1,:) = x';
-    St(t).Sigma2 = Sigma2;
+    x_trace(t+1,:) = x';
+    Sigma2_trace(t).Sigma2 = Sigma2;
 end
+
+plot(a_trace(:,1), a_trace(:,2), x_trace(:,1), x_trace(:,2));
+%set(gca,'XTick',t_list );
+%set(gca,'YTick', yticks);
+% title('Figure 1: Steps vs KB Size')
+% xlabel('No. of steps taken')
+% ylabel('Size of KB')
