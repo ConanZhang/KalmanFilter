@@ -21,7 +21,7 @@ x0,y0,vx0,vy0,max_time,del_t,theta)
 %     Rajul Ramchandani & Conan Zhang
 %     UU
 %     Fall 2016
-u = [0,0];
+u = [0;0];
 xa = [x0; y0; vx0; vy0];
 
 A = [1,0,del_t,0;0,1,0,del_t;0,0,1,0;0,0,0,1];
@@ -29,11 +29,12 @@ B = [(del_t*del_t)/2,0;0,(del_t*del_t);del_t,0;0,del_t];
 C = eye(2,4);
 Q = zeros(2,2);
 R = zeros(4,4);
-Z = CS4300_fall_sensor(xa, C, Q);
-Z_t = Z';
-x = [Z(1); Z(2); 0; 0];
+z = CS4300_sensor(xa, C, Q);
+z_trace = z';
+x = [z(1); z(2); 0; 0];
 Sigma2 = zeros(4,4);
-xt = x';
+x_trace = x';
+Sigma2_trace = Sigma2;
 
 t_vals = [0:del_t:max_time];
 num_steps = length(t_vals);
@@ -42,8 +43,8 @@ a_trace = xa';
 for t = 1:num_steps
     xa = CS4300_process(xa, A, B, u, R);
     a_trace(t+1,:) = xa';
-    Z = CS4300_fall_sensor(xa[1,2], C, Q);
-    Z_t(t+1,:) = Z';
-    [x, Sigma2] = CS4300_KF(x, Sigma2, u, Z_t, A, R, B, C, Q);
-    x_trace = x';
+    z = CS4300_sensor(xa, C, Q);
+    z_trace(t+1,:) = z';
+    [x, Sigma2] = CS4300_KF(x, Sigma2, u, z, A, R, B, C, Q);
+    x_trace(t+1,:) = x';
 end

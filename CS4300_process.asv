@@ -14,13 +14,8 @@ function xa = CS4300_process(xa, A, B, u, R)
 %     Rajul Ramchandani & Conan Zhang
 %     UU
 %     Fall 2016
-xa = (A * xa) + (B * u);
+xa = (A* xa) + (B*u);
 
-[rows,cols] = size(R);
-n = zeros(4,1);
+[row,col] = size(R);
 
-for t = 1:rows
-   n(t,1) = sqrt(R(t,t)); 
-end
-
-xa = xa + n;
+n = zeros(1,4);
