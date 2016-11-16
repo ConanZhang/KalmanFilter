@@ -14,3 +14,4 @@ function xa = CS4300_process(xa, A, B, u, R)
 %     Rajul Ramchandani & Conan Zhang
 %     UU
 %     Fall 2016
+xa = (A* xa) + (B*u) + R;

@@ -26,4 +26,4 @@ Sigma_bar_t = (A_t * Sigma_tm1 * A_t') + R_t;
 
 K_t = (Sigma_bar_t * C_t' * inv(((C_t * Sigma_bar_t * C_t') + Q_t)));
 mu_t = mu_bar_t + (K_t * (z_t - (C_t * mu_bar_t)));
-Sigma_t = (eye - (K_t * C_t)) * Sigma_bar_t;
+Sigma_t = (eye(4,2) - (K_t * C_t)) * Sigma_bar_t;
