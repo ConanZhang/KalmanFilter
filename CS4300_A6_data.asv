@@ -16,7 +16,7 @@ plot(x_trace(:,1), x_trace(:,2), 'r');
 % xlabel('No. of steps taken')
 % ylabel('Size of KB')
 
-[xt,at,zt,St] = CS4300_driver_proj(0.05,70,0.35,9.8,0.008,18000);
+[xt,at,zt,St] = CS4300_driver_proj(0.05,70,0.35,9.8,0.008,1000);
 plot(at(:,1), at(:,2), xt(:,1), xt(:,2));
 %set(gca,'XTick',t_list );
 %set(gca,'YTick', yticks);
