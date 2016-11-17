@@ -39,7 +39,7 @@ function data = CS4300_A6_data()
 % Projectile Trajectory
 % hold on
 % [xt,at,zt,St] = CS4300_driver_proj(0.5, 20, 2,9.8,0.02,3);
-% 
+%  
 % dif = abs(at(:,2) - xt(:,2));
 % M = mean(dif);
 % V = var(dif);
@@ -52,3 +52,4 @@ function data = CS4300_A6_data()
 % legend('show');
 % xlabel('X')
 % ylabel('Y')
+
