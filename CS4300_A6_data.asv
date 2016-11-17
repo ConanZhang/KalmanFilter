@@ -6,16 +6,24 @@ function data = CS4300_A6_data()
 %     Rajul Ramchandani & Conan Zhang
 %     UU
 %     Fall 2016
-[x_trace,a_trace,z_trace,Sigma2_trace] = CS4300_A6_driver_lin(0,0,1,1,1,0.1,pi/8);
-plot(a_trace(:,1), a_trace(:,2), 'DisplayName', 'Actual', x_trace(:,1), x_trace(:,2), 'rx', 'DisplayName', 'Estimated (points)', z_trace(:,1), z_trace(:,2), 'go', D);
-hold
-plot(x_trace(:,1), x_trace(:,2), 'r');
-% title('Figure 1: Steps vs KB Size')
-xlabel('X(m)')
-ylabel('Y(m)')
+% [x_trace,a_trace,z_trace,Sigma2_trace] = CS4300_A6_driver_lin(0,0,1,1,1,0.1,pi/8);
+% hold on
+% plot(a_trace(:,1), a_trace(:,2), 'DisplayName', 'Actual');
+% plot(x_trace(:,1), x_trace(:,2), 'r', 'DisplayName', 'Estimated (connected)');
+% plot(x_trace(:,1), x_trace(:,2), 'rx', 'DisplayName', 'Estimated (points)');
+% plot(z_trace(:,1), z_trace(:,2), 'go', 'DisplayName', 'Sensors');
+% legend('show', 'Location', 'northwest');
+% xlabel('X(m)')
+% ylabel('Y(m)')
 
-% [xt,at,zt,St] = CS4300_driver_proj(0.05,70,0.35,9.8,0.008,18000);
-% plot(at(:,1), at(:,2), xt(:,1), xt(:,2));
+hold on
+[xt,at,zt,St] = CS4300_driver_proj(0.5, 20, 2,9.8,0.02,3);
+plot(at(:,1), at(:,2), '.', 'DisplayName', 'Actual Trajectory');
+plot(zt(:,1), zt(:,2), 'go', 'DisplayName', 'Observed Trajectory');
+plot(xt(:,1), xt(:,2), '.r', 'DisplayName', 'Estimated Trajectory');
+% legend('show', 'Location', 'northwest');
+% xlabel('X(m)')
+% ylabel('Y(m)')
 %set(gca,'XTick',t_list );
 %set(gca,'YTick', yticks);
 % title('Figure 1: Steps vs KB Size')

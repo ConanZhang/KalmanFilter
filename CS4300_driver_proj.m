@@ -39,7 +39,7 @@ function [xt,at,zt,St] = CS4300_driver_proj(dt,t_max,obs_freq,g,r,q)
 %     Fall 2016
 
 u = [0;-g];
-xa = [0; 0; 365; 365];
+xa = [0; 0; 100; 100];
 
 A = [1,0,dt,0;0,1,0,dt;0,0,1,0;0,0,0,1];
 B = [(dt*dt)/2,0;0,(dt*dt)/2;dt,0;0,dt];
